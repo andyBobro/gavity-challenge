@@ -14,7 +14,7 @@ interface IMoovieGridCardProps {
 </script>
 
 <script setup lang="ts">
-import StarRating from '@ui/components/shared/StarRating/index.vue'
+import AppStarRating from '@ui/components/shared/AppStarRating/index.vue'
 const props = defineProps<IMoovieGridCardProps>()
 
 const { t } = useI18n()
@@ -31,7 +31,7 @@ const { t } = useI18n()
     <h4 class="text-lg font-bold">{{ props.item.title }}</h4>
     <p class="text-md">{{ props.item.release_date }}</p>
     <div class="flex justify-between flex-wrap mt-auto">
-      <StarRating class="text-md" :value="props.item.vote_average" />
+      <AppStarRating class="text-md" :value="props.item.vote_average" />
       <small class="text-sm">({{ t('shared.total') }}: {{ props.item.vote_count }}) </small>
     </div>
   </RouterLink>

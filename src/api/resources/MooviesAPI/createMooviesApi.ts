@@ -12,5 +12,11 @@ export const createMooviesApi = (instance: BaseHTTPInstance) => {
     getMoovieById: async (id: number) => {
       return instance.get<IMoovieDetails>(`${EMoovieEndpoint.MOOVIE}/${id}`)
     },
+
+    getDiscoverMoovie: async (params: Record<string, unknown> = {}) => {
+      return instance.get<IMooviesList>(`${EMoovieEndpoint.DISCOVER_MOVIES}`, {
+        params,
+      })
+    },
   }
 }

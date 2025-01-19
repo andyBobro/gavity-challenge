@@ -1,26 +1,33 @@
-import { computed, ref } from 'vue'
 import { defineStore } from 'pinia'
-import type { IMooviesList } from '@/api/resources/MooviesAPI/types'
-import { MooviesAPI } from '@/api'
+import { computed, ref } from 'vue'
+import { MooviesAPI, type IMooviesList } from '@/api'
 import { removeDuplicateMooviesByParams } from '@/utils'
 
-const STORE_ID = 'POPULAR_MOOVIES_STORE'
+export interface MovieData {
+  date: string
+  count: number
+}
 
-export const usePopularMooviesStore = defineStore(STORE_ID, () => {
+const STORE_ID = 'DISCOVER_MOOVIES_STORE'
+
+export const useDiscoverMoviesStore = defineStore(STORE_ID, () => {
   const moovies = ref<IMooviesList['results']>([])
   const currentPage = ref(1)
   const totalPages = ref(0)
   const wasLoadedOnce = ref(false)
   const loading = ref(false)
 
-  async function fetchPopularMoovies(params: Record<string, unknown> = {}) {
+  async function load(params: Record<string, unknown> = {}) {
     try {
-      const response = await MooviesAPI.getPopularMoovies(params)
+      const response = await MooviesAPI.getDiscoverMoovie(params)
+      const data = removeDuplicateMooviesByParams(response.results, 'id')
 
-      moovies.value = removeDuplicateMooviesByParams(response.results, 'title')
+      moovies.value = data
       totalPages.value = response.total_pages
       currentPage.value = response.page
       wasLoadedOnce.value = true
+
+      return data
     } catch (error) {
       console.error('Failed to fetch popular moovies:', error)
     }
@@ -32,6 +39,6 @@ export const usePopularMooviesStore = defineStore(STORE_ID, () => {
     totalPages: computed(() => totalPages.value),
     wasLoadedOnce: computed(() => wasLoadedOnce.value),
     loading: computed(() => loading.value),
-    fetchPopularMoovies,
+    load,
   }
 })
