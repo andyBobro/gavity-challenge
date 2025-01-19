@@ -10,7 +10,5 @@ import BaseLayout from '@/ui/layout/BaseLayout.vue'
 </script>
 
 <template>
-  <BaseLayout>
-    <RouterView />
-  </BaseLayout>
+  <RouterView />
 </template>

@@ -1,21 +1,34 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import PopularMooviesPage from '@/ui/pages/PopularMooviesPage.vue'
+import { ERouteName } from './types'
+import BaseLayout from '@/ui/layout/BaseLayout.vue'
+
+export * from './types'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      name: 'PopularMooviesPage',
-      component: PopularMooviesPage,
+      name: ERouteName.ROOT,
+      component: BaseLayout,
+      redirect: { name: ERouteName.POPULAR_MOVIES, params: { pageId: 1 } },
+      children: [
+        {
+          path: 'popular/:pageId',
+          name: ERouteName.POPULAR_MOVIES,
+          component: PopularMooviesPage,
+        },
+        {
+          path: 'moovie/:moovieId',
+          name: ERouteName.MOOVIE_DETAILS,
+          component: () => import('@/ui/pages/MooviePage.vue'),
+        },
+      ],
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('@/ui/pages/MooviePage.vue'),
+      path: '/:catchAll(.*)',
+      redirect: { name: ERouteName.ROOT },
     },
   ],
 })

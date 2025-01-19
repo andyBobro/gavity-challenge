@@ -15,7 +15,7 @@ export class BaseHTTPInstance {
 
   async get<T>(url: string, params?: Record<string, unknown>): Promise<T> {
     try {
-      const response: AxiosResponse<T> = await this.axiosInstance.get(url, { params })
+      const response: AxiosResponse<T> = await this.axiosInstance.get(url, params)
       return response.data
     } catch (error) {
       this.handleError(error)
