@@ -6,6 +6,7 @@ export default {
 
 <script setup lang="ts">
 import { useMoovieStore } from '@/store'
+import StarRating from '@ui/components/shared/StarRating/index.vue'
 import { computed, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRoute } from 'vue-router'
@@ -47,7 +48,7 @@ onMounted(async () => {
       </span>
     </div>
 
-    <div class="flex justify-between flex-wrap mt-auto">
+    <div class="flex text-lg justify-between flex-wrap mt-auto">
       <StarRating class="text-md" :value="currentMoovie.vote_average" />
     </div>
 

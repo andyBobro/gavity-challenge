@@ -14,14 +14,27 @@ const props = withDefaults(defineProps<IStarRatingProps>(), {
 </script>
 
 <template>
-  <div class="flex items-center">
-    <AppIcon
-      v-for="rate in props.maxStars"
-      :key="rate"
-      name="star"
+  <div class="flex items-center gap-2">
+    <div class="flex items-center justify-start mr-1">
+      <AppIcon
+        v-for="rate in props.maxStars"
+        :key="rate"
+        name="star"
+        :class="{
+          'text-yellow-600': rate <= props.value,
+        }"
+      />
+    </div>
+    <span
+      class="text-white px-2 py-1 rounded-lg text-base font-bold"
       :class="{
-        'text-yellow-500': rate <= props.value,
+        'bg-red-500': props.value < props.maxStars / 3,
+        'bg-yellow-600':
+          props.value >= props.maxStars / 3 && props.value < (props.maxStars * 2) / 3,
+        'bg-green-600': props.value >= props.maxStars / 3,
       }"
-    />
+    >
+      {{ Math.round(props.value) }} / {{ props.maxStars }}
+    </span>
   </div>
 </template>
