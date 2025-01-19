@@ -20,8 +20,6 @@ export const useMoovieStore = defineStore(STORE_ID, () => {
     state.loading = true
     try {
       const response = await MooviesAPI.getMoovieById(id)
-      console.log(response)
-
       state.moovies[id] = response
       state.loading = false
     } catch (error) {

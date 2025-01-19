@@ -5,8 +5,6 @@ import type { IMooviesList, IMoovieDetails } from './types'
 export const createMooviesApi = (instance: BaseHTTPInstance) => {
   return {
     getPopularMoovies: async (params: Record<string, unknown> = {}) => {
-      console.log(params)
-
       return instance.get<IMooviesList>(EMoovieEndpoint.MOOVIE_POPULAR, {
         params,
       })

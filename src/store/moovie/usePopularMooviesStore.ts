@@ -15,8 +15,6 @@ export const usePopularMooviesStore = defineStore(STORE_ID, () => {
 
   const fetchPopularMoovies = async (params: Record<string, unknown> = {}) => {
     try {
-      console.log(params)
-
       const response = await MooviesAPI.getPopularMoovies(params)
 
       moovies.value = removeDuplicateMooviesByParams(response.results, 'id')

@@ -32,8 +32,6 @@ onMounted(() => {
 watch(
   () => page.value,
   (newPage) => {
-    console.log('new page')
-
     popularMooviesPageStore.fetchPopularMoovies({ page: newPage })
   },
 )
