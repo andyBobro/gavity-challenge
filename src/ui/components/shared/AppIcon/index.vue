@@ -17,5 +17,12 @@ const icon = defineAsyncComponent(() => import(`../../../../assets/icons/icon_${
 </script>
 
 <template>
-  <component :is="icon" v-bind="$attrs" />
+  <component :is="icon" v-bind="$attrs" class="svg-icon" />
 </template>
+
+<style scoped>
+.svg-icon {
+  max-width: 1em;
+  height: 1em;
+}
+</style>
