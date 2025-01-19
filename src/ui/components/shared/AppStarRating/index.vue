@@ -1,6 +1,6 @@
 <script lang="ts">
-export default { name: 'StarRating' }
-interface IStarRatingProps {
+export default { name: 'AppStarRating' }
+interface IAppStarRatingProps {
   value: number
   maxStars?: number
 }
@@ -8,13 +8,13 @@ interface IStarRatingProps {
 
 <script setup lang="ts">
 import AppIcon from '@/ui/components/shared/AppIcon/index.vue'
-const props = withDefaults(defineProps<IStarRatingProps>(), {
+const props = withDefaults(defineProps<IAppStarRatingProps>(), {
   maxStars: 10,
 })
 </script>
 
 <template>
-  <div class="flex items-center gap-2">
+  <div class="flex items-center flex-wrap">
     <div class="flex items-center justify-start mr-1">
       <AppIcon
         v-for="rate in props.maxStars"

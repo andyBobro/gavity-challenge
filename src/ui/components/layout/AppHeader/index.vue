@@ -7,7 +7,7 @@ export default {
 <script setup lang="ts">
 import { ERouteName } from '@/router'
 import { useI18n } from 'vue-i18n'
-import AppButton from '@ui/components/control/AppButton/index.vue'
+import AppHeaderPopup from '@ui/components/shared/AppHeaderPopup/index.vue'
 
 const { t } = useI18n()
 </script>
@@ -30,8 +30,10 @@ const { t } = useI18n()
             {{ t('nav.popular') }}
           </router-link>
         </li>
+        <li>
+          <AppHeaderPopup />
+        </li>
       </ul>
-      <AppButton>{{ t('nav.stats') }}</AppButton>
     </nav>
   </header>
 </template>

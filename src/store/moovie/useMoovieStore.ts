@@ -8,7 +8,7 @@ interface IMoovieState {
   loading: boolean
 }
 
-export const STORE_ID = 'MOOVIE_STORE'
+const STORE_ID = 'MOOVIE_STORE'
 
 export const useMoovieStore = defineStore(STORE_ID, () => {
   const state = reactive<IMoovieState>({
@@ -16,7 +16,11 @@ export const useMoovieStore = defineStore(STORE_ID, () => {
     loading: false,
   })
 
-  const fetchMoovie = async (id: number) => {
+  const moovieById = computed(() => {
+    return (id: number) => state.moovies[id]
+  })
+
+  async function fetchMoovie(id: number) {
     state.loading = true
     try {
       const response = await MooviesAPI.getMoovieById(id)
@@ -27,10 +31,6 @@ export const useMoovieStore = defineStore(STORE_ID, () => {
       state.loading = false
     }
   }
-
-  const moovieById = computed(() => {
-    return (id: number) => state.moovies[id]
-  })
 
   return {
     fetchMoovie,
